@@ -2,8 +2,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.dao;
 
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

@@ -2,9 +2,8 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.bussines.GestionProductos;
-import ec.edu.ups.ppw63.transacciones.model.Producto;
-import ec.edu.ups.ppw63.transacciones.model.Producto;
+import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionProductos;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -27,7 +26,7 @@ public class ProductoServices {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response crear(Producto producto) {
+	public Response crear(Productos producto) {
 		try{
 			gProducto.guardarProductos(producto);
 			ErrorMessage error = new ErrorMessage(1, "OK");
@@ -47,7 +46,7 @@ public class ProductoServices {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response actualizar(Producto producto) {
+	public Response actualizar(Productos producto) {
 		try{
 			gProducto.actualizarProducto(producto);
 			return Response.ok(producto).build();
@@ -65,7 +64,7 @@ public class ProductoServices {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("list")
 	public Response getProductos(){
-		List<Producto> productos = gProducto.getProductos();
+		List<Productos> productos = gProducto.getProductos();
 		if(productos.size()>0)
 			return Response.ok(productos).build();
 		

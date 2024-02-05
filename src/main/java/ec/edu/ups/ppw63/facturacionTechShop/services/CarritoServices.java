@@ -2,10 +2,9 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.bussines.GestionCarrito;
-import ec.edu.ups.ppw63.transacciones.bussines.GestionCarrito;
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Detalles_Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCarrito;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Detalles_Carrito;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;

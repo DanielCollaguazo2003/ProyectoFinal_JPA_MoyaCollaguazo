@@ -3,13 +3,8 @@ package ec.edu.ups.ppw63.facturacionTechShop.bussines;
 import java.util.Date;
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.dao.ProductoDAO;
-import ec.edu.ups.ppw63.transacciones.dao.ProductoDAO;
-import ec.edu.ups.ppw63.transacciones.dao.ProductoDAO;
-import ec.edu.ups.ppw63.transacciones.dao.ProductoDAO;
-import ec.edu.ups.ppw63.transacciones.model.Producto;
-import ec.edu.ups.ppw63.transacciones.model.Producto;
-import ec.edu.ups.ppw63.transacciones.model.Transaccion;
+import ec.edu.ups.ppw63.facturacionTechShop.dao.ProductosDao;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -17,10 +12,10 @@ import jakarta.inject.Inject;
 public class GestionProductos {
 
 	@Inject
-	private ProductoDAO daoProducto;
+	private ProductosDao daoProducto;
 	
-	public void actualizarProducto(Producto producto) throws Exception {
-		Producto pro = daoProducto.read(producto.getCodigo());
+	public void actualizarProducto(Productos producto) throws Exception {
+		Productos pro = daoProducto.read(producto.getCodigo());
 		if (pro != null){
 			daoProducto.update(producto);
 		}else {
@@ -28,9 +23,9 @@ public class GestionProductos {
 		}
 	}
 	
-	public void guardarProductos(Producto producto) {
+	public void guardarProductos(Productos producto) {
 		System.out.println("Codigo: " + producto.getCodigo());
-		Producto pro = daoProducto.read(producto.getCodigo());
+		Productos pro = daoProducto.read(producto.getCodigo());
 		if (pro != null) {
 			System.out.println("Este es: " + producto);
 			daoProducto.update(producto);
@@ -39,19 +34,12 @@ public class GestionProductos {
 		}
 	}
 	
-	public Producto getProductoPorId(int codigo){
-			return daoProducto.getProductoPorId(codigo);
-	}
-	
 	public void borrarProducto(int codigo) {
 		daoProducto.remove(codigo);
 	}
 	
-	public List<Producto> getProductos(){
+	public List<Productos> getProductos(){
 		return daoProducto.getAll();
 	}
 	
-	public void transferir(Transaccion transferencia) throws Exception{
-		
-	}
 }

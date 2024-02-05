@@ -3,13 +3,9 @@ package ec.edu.ups.ppw63.facturacionTechShop.bussines;
 import java.util.Date;
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.dao.CarritoDAO;
-import ec.edu.ups.ppw63.transacciones.dao.CarritoDAO;
-import ec.edu.ups.ppw63.transacciones.dao.CarritoDAO;
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Detalles_Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Transaccion;
+import ec.edu.ups.ppw63.facturacionTechShop.dao.CarritoDAO;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Detalles_Carrito;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 

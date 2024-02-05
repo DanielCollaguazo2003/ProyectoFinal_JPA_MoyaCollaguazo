@@ -2,13 +2,11 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 
 import java.util.List;
 
-import ec.edu.ups.ppw63.transacciones.bussines.GestionCarrito;
-import ec.edu.ups.ppw63.transacciones.bussines.GestionFacturas;
-import ec.edu.ups.ppw63.transacciones.bussines.GestionCarrito;
-import ec.edu.ups.ppw63.transacciones.model.Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Detalles_Carrito;
-import ec.edu.ups.ppw63.transacciones.model.Factura;
-import ec.edu.ups.ppw63.transacciones.model.prueba;
+import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCarrito;
+import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.model.prueba;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -53,7 +51,7 @@ public class FacturarServices {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response actualizar(Factura factura) {
+	public Response actualizar(CabeceraFacturas factura) {
 		try{
 			gFacturas.actualizarFactura(factura);
 			return Response.ok(factura).build();
@@ -87,7 +85,7 @@ public class FacturarServices {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("list")
 	public Response getFacturas(){
-		List<Factura> factura = gFacturas.getFacturas();
+		List<CabeceraFacturas> factura = gFacturas.getFacturas();
 		if(factura.size()>0)
 			return Response.ok(factura).build();
 		

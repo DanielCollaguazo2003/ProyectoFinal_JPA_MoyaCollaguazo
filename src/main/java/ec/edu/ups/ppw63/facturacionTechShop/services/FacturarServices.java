@@ -4,9 +4,9 @@ import java.util.List;
 
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCarrito;
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.dto.prueba;
 import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
-import ec.edu.ups.ppw63.facturacionTechShop.model.prueba;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;

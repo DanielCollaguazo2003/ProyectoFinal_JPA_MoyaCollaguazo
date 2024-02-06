@@ -33,18 +33,15 @@ public class ClienteDao {
 	}
 	
 	public List<Cliente> getAll(){
-		String jpql = "SELECT c FROM Cliente c"; //JPQL es sensible a mayusculas --- para realizar una consulta es similar pero hay q ue tener en cuenta que se tiene una variabe en lugar del alterisco y hay que referenciar a la entidad  no a la tabla
-												 // Es decir se debe consultar en la entidad mas no directamente a una tabla de la base de datos 
-												 // En lugar del * se coloca una variable, esa variable hace referencia al alias de la entidad
+		String jpql = "SELECT c FROM Cliente c"; 
 		Query q = em.createQuery(jpql, Cliente.class);
 		return q.getResultList();
 	}
 	
-	public Cliente getClientePorCedula(String cedula) {
-
-		String jpql = "SELECT c FROM Cliente c WHERE c.dni = :cedula";
+	public Cliente getClienteEmail(String email){
+		String jpql = "SELECT c FROM Cliente c WHERE c.correo = :email";
 		Query q = em.createQuery(jpql, Cliente.class);
-		q.setParameter("cedula", cedula);
+		q.setParameter("email", email);
 		List<Cliente> clientes = q.getResultList();
 		if (clientes.size() > 0)
 			return clientes.get(0);

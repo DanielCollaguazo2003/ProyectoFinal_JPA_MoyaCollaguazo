@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,14 +36,16 @@ public class CabeceraFacturas {
 	private float precioSubtotal;
 	
 	@ManyToOne
-	@JoinColumn(name = "cli_codigo")
-	Cliente cliente;
-	
-	@ManyToOne
 	@JoinColumn(name = "emp_codigo")
+	@JsonbTransient
 	Empleados empleados;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "fk_cliente")
+	Cliente cliente;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fac_codigo")
 	List<DetalleFacturas> detallesList;
 
@@ -85,14 +89,6 @@ public class CabeceraFacturas {
 		this.precioSubtotal = precioSubtotal;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	public Empleados getEmpleados() {
 		return empleados;
 	}
@@ -109,6 +105,14 @@ public class CabeceraFacturas {
 		this.detallesList = detallesList;
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public void addDetalles (DetalleFacturas detalle) {
 		if (detallesList == null)
 			detallesList = new ArrayList<DetalleFacturas>();
@@ -119,9 +123,10 @@ public class CabeceraFacturas {
 	@Override
 	public String toString() {
 		return "CabeceraFacturas [codigo=" + codigo + ", fecha=" + fecha + ", precioTotal=" + precioTotal
-				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", cliente=" + cliente
-				+ ", empleados=" + empleados + ", detallesList=" + detallesList + "]";
+				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", empleados=" + empleados
+				+ ", detallesList=" + detallesList + "]";
 	}
+	
 	
 	
 }

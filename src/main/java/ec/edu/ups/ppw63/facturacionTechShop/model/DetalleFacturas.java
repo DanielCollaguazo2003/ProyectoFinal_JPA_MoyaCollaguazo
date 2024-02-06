@@ -2,6 +2,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.model;
 
 
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ public class DetalleFacturas {
 	
 	@ManyToOne
 	@JoinColumn(name = "pro_codigo")
+	@JsonbTransient
 	Productos productos;
 	
 	public int getCodigo() {

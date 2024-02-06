@@ -45,7 +45,6 @@ public class GestionDatos {
 System.out.println("iniciando");
 		
 		Cliente cliente = new Cliente();
-		cliente.setCedulaRuc("0107193708");
 		cliente.setPrimerNombre("Daniel");
 		cliente.setPrimerApellido("Collaguazo");
 		cliente.setCorreo("collaguazodaniel48@gmail.com");
@@ -54,7 +53,6 @@ System.out.println("iniciando");
 		daoCliente.insert(cliente);
 		
 		Cliente cliente2 = new Cliente();
-		cliente2.setCedulaRuc("0102735974");
 		cliente2.setPrimerNombre("Claudio");
 		cliente2.setPrimerApellido("Collaguazo");
 		cliente2.setCorreo("claudiocf26@gmail.com");
@@ -146,6 +144,34 @@ System.out.println("iniciando");
 		
 		daoFactura.insert(factura);
 		
+		
+		factura = new CabeceraFacturas();
+		factura.setCliente(cliente);
+		factura.setEmpleados(empleado);
+		factura.setFecha(new Date());
+		factura.setPrecioTotal(100);
+		factura.setPrecioIva(20);
+		factura.setPrecioSubtotal(80);
+		
+		
+		DetalleFacturas det4 = new DetalleFacturas();
+		det2.setCantidad(3);
+		det2.setPrecioTotal(30);
+		det2.setPrecioIva(6);
+		det2.setProductos(producto2);
+
+		factura.addDetalles(det4);
+	
+		DetalleFacturas det5 = new DetalleFacturas();
+		det3.setCantidad(4);
+		det3.setPrecioTotal(40);
+		det3.setPrecioIva(7);
+		det3.setProductos(producto3);
+		
+		factura.addDetalles(det5);
+		
+		
+		daoFactura.insert(factura);
 		
 		/*System.out.println("\n------------- Clientes");
 		List<Cliente> list = daoCliente.getAll();

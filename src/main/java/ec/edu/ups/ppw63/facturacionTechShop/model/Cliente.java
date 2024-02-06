@@ -2,15 +2,18 @@ package ec.edu.ups.ppw63.facturacionTechShop.model;
 
 import java.util.List;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Cliente {
@@ -19,20 +22,11 @@ public class Cliente {
 	@Column(name = "cli_codigo")
 	private int codigo;
 	
-	@Column(name = "cli_cedula", length = 15, nullable = true)
-	private String cedulaRuc;
-	
 	@Column(name = "cli_primer_nombre", length = 60, nullable = false)
 	private String primerNombre;
 	
 	@Column(name = "cli_primer_apellido", length = 60, nullable = false)
 	private String primerApellido;
-	
-	@Column(name = "cli_segundo_nombre", length = 60, nullable = true)
-	private String segundoNombre;
-	
-	@Column(name = "cli_segundo_apellido", length = 60, nullable = true)
-	private String segundoApellido;
 	
 	@Column(name = "cli_correo", length = 100, nullable = false)
 	private String correo;
@@ -42,28 +36,30 @@ public class Cliente {
 	
 	@Column(name = "cli_celular", length = 15, nullable = true)
 	private String celular;
+	
+	
+
+	public Cliente( String primerNombre, String primerApellido, String correo) {
+		this.primerNombre = primerNombre;
+		this.primerApellido = primerApellido;
+		this.correo = correo;
+	}
+	
+	public Cliente() {}
 
 	@ManyToOne
 	@JoinColumn(name = "dir_codigo")
 	Direcciones direcciones;
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	List<CabeceraFacturas> caberasList;
-
+//	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	List<CabeceraFacturas> caberasList;
+	
 	public int getCodigo() {
 		return codigo;
 	}
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getCedulaRuc() {
-		return cedulaRuc;
-	}
-
-	public void setCedulaRuc(String cedulaRuc) {
-		this.cedulaRuc = cedulaRuc;
 	}
 
 	public String getPrimerNombre() {
@@ -80,22 +76,6 @@ public class Cliente {
 
 	public void setPrimerApellido(String primerApellido) {
 		this.primerApellido = primerApellido;
-	}
-
-	public String getSegundoNombre() {
-		return segundoNombre;
-	}
-
-	public void setSegundoNombre(String segundoNombre) {
-		this.segundoNombre = segundoNombre;
-	}
-
-	public String getSegundoApellido() {
-		return segundoApellido;
-	}
-
-	public void setSegundoApellido(String segundoApellido) {
-		this.segundoApellido = segundoApellido;
 	}
 
 	public String getCorreo() {
@@ -130,21 +110,31 @@ public class Cliente {
 		this.direcciones = direcciones;
 	}
 
-	public List<CabeceraFacturas> getCaberasList() {
-		return caberasList;
-	}
-
-	public void setCaberasList(List<CabeceraFacturas> caberasList) {
-		this.caberasList = caberasList;
-	}
-
 	@Override
 	public String toString() {
-		return "Cliente [codigo=" + codigo + ", cedulaRuc=" + cedulaRuc + ", primerNombre=" + primerNombre
-				+ ", primerApellido=" + primerApellido + ", segundoNombre=" + segundoNombre + ", segundoApellido="
-				+ segundoApellido + ", correo=" + correo + ", contrasenia=" + contrasenia + ", celular=" + celular
-				+ ", direcciones=" + direcciones + ", caberasList=" + caberasList + "]";
+		return "Cliente [codigo=" + codigo + ", primerNombre=" + primerNombre + ", primerApellido=" + primerApellido
+				+ ", correo=" + correo + ", contrasenia=" + contrasenia + ", celular=" + celular + ", direcciones="
+				+ direcciones + "]";
 	}
+
+//	public List<CabeceraFacturas> getCaberasList() {
+//		return caberasList;
+//	}
+//
+//	public void setCaberasList(List<CabeceraFacturas> caberasList) {
+//		this.caberasList = caberasList;
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "Cliente [codigo=" + codigo + ", primerNombre=" + primerNombre + ", primerApellido=" + primerApellido
+//				+ ", correo=" + correo + ", contrasenia=" + contrasenia + ", celular=" + celular + ", direcciones="
+//				+ direcciones + ", caberasList=" + caberasList + "]";
+//	}
+	
+	
+	
+	
 	
 	
 	

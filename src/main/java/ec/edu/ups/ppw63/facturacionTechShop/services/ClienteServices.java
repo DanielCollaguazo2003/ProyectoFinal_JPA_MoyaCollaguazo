@@ -29,7 +29,8 @@ public class ClienteServices {
 	public Response crear(Cliente cliente) {
 		try{
 			gClientes.guardarClientes(cliente);
-			return Response.ok(cliente).build();
+			ErrorMessage error = new ErrorMessage(1, "OK");
+			return Response.ok(error).build();
 		}catch (Exception e) {
 			// TODO: handle exception
 			ErrorMessage error = new ErrorMessage(99, e.getMessage());
@@ -67,40 +68,40 @@ public class ClienteServices {
 		}
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	//@Produces("application/json")
-	public Response leer(@QueryParam("dni") String cedula, @QueryParam("nombre") String nombre) {
-		try{
-			System.out.println("cedula " +  cedula + " nom=" + nombre);
-			Cliente cli = gClientes.getClientePorCedula(cedula);
-			return Response.ok(cli).build();
-		}catch (Exception e) {
-			// TODO: handle exception
-			ErrorMessage error = new ErrorMessage(4, "Cliente no existe");
-			return Response.status(Response.Status.NOT_FOUND)
-					.entity(error)
-					.build();
-		}
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	//@Produces("application/json")
+//	public Response leer(@QueryParam("dni") String cedula, @QueryParam("nombre") String nombre) {
+//		try{
+//			System.out.println("cedula " +  cedula + " nom=" + nombre);
+//			Cliente cli = gClientes.getClientePorCedula(cedula);
+//			return Response.ok(cli).build();
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//			ErrorMessage error = new ErrorMessage(4, "Cliente no existe");
+//			return Response.status(Response.Status.NOT_FOUND)
+//					.entity(error)
+//					.build();
+//		}
+//	}
 	
-	@GET
-	@Path("{dni}/{nombre}")
-	@Produces(MediaType.APPLICATION_JSON)
-	//@Produces("application/json")
-	public Response leer2(@PathParam("dni") String cedula, @PathParam("nombre") String nombre) {
-		try{
-			System.out.println("cedula " +  cedula + " nom=" + nombre);
-			Cliente cli = gClientes.getClientePorCedula(cedula);
-			return Response.ok(cli).build();
-		}catch (Exception e) {
-			// TODO: handle exception
-			ErrorMessage error = new ErrorMessage(4, "Cliente no existe");
-			return Response.status(Response.Status.NOT_FOUND)
-					.entity(error)
-					.build();
-		}
-	}
+//	@GET
+//	@Path("{dni}/{nombre}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	//@Produces("application/json")
+//	public Response leer2(@PathParam("dni") String cedula, @PathParam("nombre") String nombre) {
+//		try{
+//			System.out.println("cedula " +  cedula + " nom=" + nombre);
+//			Cliente cli = gClientes.getClientePorCedula(cedula);
+//			return Response.ok(cli).build();
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//			ErrorMessage error = new ErrorMessage(4, "Cliente no existe");
+//			return Response.status(Response.Status.NOT_FOUND)
+//					.entity(error)
+//					.build();
+//		}
+//	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

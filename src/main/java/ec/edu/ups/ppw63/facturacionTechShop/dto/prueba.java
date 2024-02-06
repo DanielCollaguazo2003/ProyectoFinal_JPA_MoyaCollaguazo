@@ -1,4 +1,4 @@
-package ec.edu.ups.ppw63.facturacionTechShop.model;
+package ec.edu.ups.ppw63.facturacionTechShop.dto;
 
 public class prueba {
 

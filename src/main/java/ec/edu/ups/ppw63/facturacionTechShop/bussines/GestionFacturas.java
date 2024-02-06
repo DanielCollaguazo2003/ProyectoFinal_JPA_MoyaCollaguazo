@@ -32,7 +32,7 @@ public class GestionFacturas {
 	
 	public void guardarFacturas(Carrito carrito) {
 		CabeceraFacturas fac = new CabeceraFacturas();
-		fac.setCliente(carrito.getCliente());
+//		fac.setCliente(carrito.getCliente());
 		//fac.setFechaEmision(new Date());
 		//fac.setNumero("010101010100101");
 		//fac.setTotal(1000);

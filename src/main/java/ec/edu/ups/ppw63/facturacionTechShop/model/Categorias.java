@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,9 +27,20 @@ public class Categorias {
 	@Column(name = "cat_imagen", length = 200, nullable = false)
 	private String imagen;
 
-	@OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL)
-	List<Productos> productosList;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	List<Productos> productosList = new ArrayList<Productos>();
 	
+	
+	
+	
+	public List<Productos> getProductosList() {
+		return productosList;
+	}
+
+	public void setProductosList(List<Productos> productosList) {
+		this.productosList = productosList;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -53,12 +65,6 @@ public class Categorias {
 		this.imagen = imagen;
 	}
 	
-	public void addProductos (Productos productos) {
-		if (productosList == null)
-			productosList = new ArrayList<Productos>();
-			
-		productosList.add(productos);
-	}
 
 	@Override
 	public String toString() {

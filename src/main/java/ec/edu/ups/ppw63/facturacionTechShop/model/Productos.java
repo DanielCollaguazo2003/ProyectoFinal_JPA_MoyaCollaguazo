@@ -36,9 +36,9 @@ public class Productos {
 	private String imagen;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "cat_codigo")
-	Categorias categorias;
+//	@ManyToOne
+//	@JoinColumn(name = "cat_codigo")
+//	Categorias categorias;
 	
 	//@OneToMany(mappedBy = "productos", cascade = CascadeType.ALL)
 	//List<DetalleFacturas> detallesList;
@@ -48,14 +48,14 @@ public class Productos {
 	}
 	
 
-	public Categorias getCategorias() {
-		return categorias;
-	}
-
-
-	public void setCategorias(Categorias categorias) {
-		this.categorias = categorias;
-	}
+//	public Categorias getCategorias() {
+//		return categorias;
+//	}
+//
+//
+//	public void setCategorias(Categorias categorias) {
+//		this.categorias = categorias;
+//	}
 
 
 	public void setCodigo(int codigo) {
@@ -102,12 +102,21 @@ public class Productos {
 		this.imagen = imagen;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
-				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + ", categorias=" + categorias
-				+ "]";
+				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + "]";
 	}
+
+	
+	
+//	@Override
+//	public String toString() {
+//		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
+//				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + ", categorias=" + categorias
+//				+ "]";
+//	}
 
 
 	

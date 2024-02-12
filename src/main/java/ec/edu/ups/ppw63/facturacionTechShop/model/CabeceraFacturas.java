@@ -35,10 +35,6 @@ public class CabeceraFacturas {
 	@Column(name = "cab_precio_subtotal", nullable = false)
 	private float precioSubtotal;
 	
-	@ManyToOne
-	@JoinColumn(name = "emp_codigo")
-	@JsonbTransient
-	Empleados empleados;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente")
@@ -89,14 +85,6 @@ public class CabeceraFacturas {
 		this.precioSubtotal = precioSubtotal;
 	}
 
-	public Empleados getEmpleados() {
-		return empleados;
-	}
-
-	public void setEmpleados(Empleados empleados) {
-		this.empleados = empleados;
-	}
-
 	public List<DetalleFacturas> getDetallesList() {
 		return detallesList;
 	}
@@ -120,12 +108,16 @@ public class CabeceraFacturas {
 		detallesList.add(detalle);
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "CabeceraFacturas [codigo=" + codigo + ", fecha=" + fecha + ", precioTotal=" + precioTotal
-				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", empleados=" + empleados
+				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", cliente=" + cliente
 				+ ", detallesList=" + detallesList + "]";
 	}
+	
+	
 	
 	
 	

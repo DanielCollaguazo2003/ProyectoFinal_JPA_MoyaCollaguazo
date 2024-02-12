@@ -3,6 +3,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 import java.util.List;
 
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionClientes;
+import ec.edu.ups.ppw63.facturacionTechShop.dto.RespuestaIngreso;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Cliente;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -45,8 +46,8 @@ public class ClienteServices {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response actualizar(Cliente cliente) {
 		try{
-			gClientes.actualizarCliente(cliente);
-			return Response.ok(cliente).build();
+			RespuestaIngreso r = gClientes.actualizarCliente(cliente);
+			return Response.ok(r).build();
 		}catch (Exception e) {
 			// TODO: handle exception
 			ErrorMessage error = new ErrorMessage(99, e.getMessage());

@@ -7,14 +7,12 @@ import java.util.List;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.CabecerasDao;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.CategoriaDao;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.ClienteDao;
-import ec.edu.ups.ppw63.facturacionTechShop.dao.EmpleadoDao;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.ProductosDao;
 import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Categorias;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Cliente;
 import ec.edu.ups.ppw63.facturacionTechShop.model.DetalleFacturas;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Direcciones;
-import ec.edu.ups.ppw63.facturacionTechShop.model.Empleados;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
@@ -27,9 +25,6 @@ public class GestionDatos {
 
 	@Inject
 	private ClienteDao daoCliente;
-	
-	@Inject
-	private EmpleadoDao daoEmpleado;
 	
 	@Inject
 	private CategoriaDao daoCategoria;
@@ -48,7 +43,7 @@ System.out.println("iniciando");
 		cliente.setPrimerNombre("Daniel");
 		cliente.setPrimerApellido("Collaguazo");
 		cliente.setCorreo("collaguazodaniel48@gmail.com");
-		cliente.setContrasenia("Collaguazo123");
+		cliente.setContrasenia("123");
 		
 		daoCliente.insert(cliente);
 		
@@ -56,7 +51,7 @@ System.out.println("iniciando");
 		cliente2.setPrimerNombre("Claudio");
 		cliente2.setPrimerApellido("Collaguazo");
 		cliente2.setCorreo("claudiocf26@gmail.com");
-		cliente2.setContrasenia("Collaguazo123");
+		cliente2.setContrasenia("123");
 		
 		daoCliente.insert(cliente2);
 		
@@ -70,12 +65,7 @@ System.out.println("iniciando");
 		direcciones.addClienteDir(cliente);
 		direcciones.addClienteDir(cliente2);
 		
-		Empleados empleado = new Empleados();
-		empleado.setNombre("Christian");
-		empleado.setApellido("Collaguazo");
-		
-		daoEmpleado.insert(empleado);
-		
+
 		Productos producto = new Productos();
 		producto.setNombre("Lampara");
 		producto.setDescripcion("Lampara de cocina de 100W");
@@ -106,11 +96,48 @@ System.out.println("iniciando");
 		
 		Categorias categoria = new Categorias();
 		categoria.setNombre("Hogar");
-		categoria.setImagen("/asstest/img/cocina.png");
-		categoria.addProductos(producto);
-		categoria.addProductos(producto2);
-		categoria.addProductos(producto3);
+		categoria.setImagen("/assets/img/categorias/cocina.jpg");
+		categoria.getProductosList().add(producto);
+		categoria.getProductosList().add(producto2);
+		categoria.getProductosList().add(producto3);
 		daoCategoria.insert(categoria);
+		
+		
+		Productos producto4 = new Productos();
+		producto4.setNombre("Iphone 15 Pro Max");
+		producto4.setDescripcion("Iphone Pro Max de color nuevo y de gran calidad");
+		producto4.setBreveDescripcion("Esta es una breve descripcion");
+		producto4.setPrecio(150);
+		producto4.setCantidad(200);
+		producto4.setImagen("/asstest/img/lampara.png");
+		daoProducto.insert(producto4);
+		
+		Productos producto5 = new Productos();
+		producto5.setNombre("Cortina");
+		producto5.setDescripcion("Cortina de Cuarto de 2m");
+		producto5.setBreveDescripcion("Esta es una breve descripcion");
+		producto5.setPrecio(15);
+		producto5.setCantidad(45);
+		producto5.setImagen("/asstest/img/cortina.png");
+		daoProducto.insert(producto2);
+		
+		Productos producto6 = new Productos();
+		producto6.setNombre("Mesa Familiar");
+		producto6.setDescripcion("Mesa de comedor fammiliar para 6 personas");
+		producto6.setBreveDescripcion("Esta es una breve descripcion");
+		producto6.setPrecio(150);
+		producto6.setCantidad(30);
+		producto6.setImagen("/asstest/img/mesa.png");
+		daoProducto.insert(producto3);
+		
+		
+		Categorias categoria2 = new Categorias();
+		categoria2.setNombre("Celulares");
+		categoria2.setImagen("/assets/img/categorias/xbox-logo.png");
+		categoria2.getProductosList().add(producto4);
+		categoria2.getProductosList().add(producto5);
+		categoria2.getProductosList().add(producto6);
+		daoCategoria.insert(categoria2);
 		
 		DetalleFacturas det = new DetalleFacturas();
 		det.setCantidad(2);
@@ -120,7 +147,6 @@ System.out.println("iniciando");
 		
 		CabeceraFacturas factura = new CabeceraFacturas();
 		factura.setCliente(cliente);
-		factura.setEmpleados(empleado);
 		factura.setFecha(new Date());
 		factura.setPrecioTotal(100);
 		factura.setPrecioIva(20);
@@ -150,7 +176,6 @@ System.out.println("iniciando");
 		
 		factura = new CabeceraFacturas();
 		factura.setCliente(cliente);
-		factura.setEmpleados(empleado);
 		factura.setFecha(new Date());
 		factura.setPrecioTotal(100);
 		factura.setPrecioIva(20);
@@ -181,10 +206,11 @@ System.out.println("iniciando");
 		for (Cliente cli: list) {
 			System.out.println(cli.getCodigo() + "\t" + cli.getNombre());
 		}*/
-		System.out.println("\n------------- Facturas2");
+		System.out.println("\n--------------------------------------------------- Facturas2");
 		List<CabeceraFacturas> list2 = daoFactura.getAll();
-		for (CabeceraFacturas fac: list2) {
-			System.out.println(fac);
+		List<Categorias> list3 = daoCategoria.getAll();
+		for (Categorias fac: list3) {
+			System.out.println("wazaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+fac.toString());
 		}
 	}
 }

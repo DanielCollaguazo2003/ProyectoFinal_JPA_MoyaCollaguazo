@@ -35,10 +35,6 @@ public class CabeceraFacturas {
 	private float precioSubtotal;
 	
 	@ManyToOne
-	@JoinColumn(name = "emp_codigo")
-	Empleados empleados;
-	
-	@ManyToOne
 	@JoinColumn(name = "fk_cliente")
 	Cliente cliente;
 	
@@ -87,14 +83,6 @@ public class CabeceraFacturas {
 		this.precioSubtotal = precioSubtotal;
 	}
 
-	public Empleados getEmpleados() {
-		return empleados;
-	}
-
-	public void setEmpleados(Empleados empleados) {
-		this.empleados = empleados;
-	}
-
 	public List<DetalleFacturas> getDetallesList() {
 		return detallesList;
 	}
@@ -118,12 +106,16 @@ public class CabeceraFacturas {
 		detallesList.add(detalle);
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "CabeceraFacturas [codigo=" + codigo + ", fecha=" + fecha + ", precioTotal=" + precioTotal
-				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", empleados=" + empleados
+				+ ", precioIva=" + precioIva + ", precioSubtotal=" + precioSubtotal + ", cliente=" + cliente
 				+ ", detallesList=" + detallesList + "]";
 	}
+	
+	
 	
 	
 	

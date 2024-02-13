@@ -37,6 +37,14 @@ public class Cliente {
 	private String celular;
 	
 	
+	
+
+	public Cliente(int codigo, String primerNombre, String primerApellido, String correo) {
+		this.codigo = codigo;
+		this.primerNombre = primerNombre;
+		this.primerApellido = primerApellido;
+		this.correo = correo;
+	}
 
 	public Cliente( String primerNombre, String primerApellido, String correo) {
 		this.primerNombre = primerNombre;

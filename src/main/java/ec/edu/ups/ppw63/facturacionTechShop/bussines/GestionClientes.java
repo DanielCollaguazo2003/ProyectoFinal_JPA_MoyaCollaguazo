@@ -10,6 +10,7 @@ import ec.edu.ups.ppw63.facturacionTechShop.model.Cliente;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
+
 @Stateless
 public class GestionClientes {
 
@@ -19,10 +20,15 @@ public class GestionClientes {
 	private boolean ingresoExitoso = false;
 	private RespuestaIngreso ri;
 	
-	public void actualizarCliente(Cliente cliente) throws Exception {
-		Cliente cli = daoCliente.read(cliente.getCodigo());
+	public RespuestaIngreso actualizarCliente(Cliente cliente) throws Exception {
+		Cliente cli = daoCliente.getClienteEmail(cliente.getCorreo());
 		if (cli != null){
 			daoCliente.update(cliente);
+			ingresoExitoso = true;
+			ri = new RespuestaIngreso();
+			ri.setCliente(cliente);
+			ri.setInicioExitoso(ingresoExitoso);
+			return ri;
 		}else {
 			throw new Exception("Cliente no existe");
 		}
@@ -45,18 +51,19 @@ public class GestionClientes {
 		return daoCliente.getAll();
 	}
 	
-	public RespuestaIngreso verificacionCredenciales(Ingreso ingreso){
+	public RespuestaIngreso verificacionCredenciales(Ingreso ingreso) throws Exception{
 		Cliente c = daoCliente.getClienteEmail(ingreso.getEmail() );
 		if((c != null) && (c.getContrasenia().equals(ingreso.getClave()))) {
 			Cliente nc = new Cliente(c.getPrimerNombre(), c.getPrimerApellido(), c.getCorreo());
+			nc.setCodigo(c.getCodigo());
 			ingresoExitoso = true;
 			ri = new RespuestaIngreso();
 			ri.setInicioExitoso(ingresoExitoso);
-			ri.setCliente(nc);
+			ri.setCliente(c);
 			return ri;
 		}
 		else {
-			return null;
+			throw new Exception("Usuario no encontrado");
 		}
 	}
 	

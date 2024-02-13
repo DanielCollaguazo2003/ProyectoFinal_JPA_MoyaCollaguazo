@@ -17,7 +17,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("Productos")
+@Path("productos")
 public class ProductoServices {
 	
 	@Inject
@@ -73,6 +73,23 @@ public class ProductoServices {
 				.entity(error)
 				.build();
 		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces("application/json")
+	public Response leer3(@QueryParam("codigo") int codigo) {
+		try{
+			System.out.println("codigo " +  codigo );
+			Productos pro = gProducto.getProductoPorId(codigo);
+			return Response.ok(pro).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(4, "el producto no existe");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
 	}
 
 }

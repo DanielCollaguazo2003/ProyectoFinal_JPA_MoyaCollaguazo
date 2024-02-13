@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +36,6 @@ public class CabeceraFacturas {
 	
 	@ManyToOne
 	@JoinColumn(name = "emp_codigo")
-	@JsonbTransient
 	Empleados empleados;
 	
 	@ManyToOne

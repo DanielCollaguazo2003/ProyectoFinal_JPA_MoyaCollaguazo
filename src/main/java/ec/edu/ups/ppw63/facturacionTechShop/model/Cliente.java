@@ -2,7 +2,6 @@ package ec.edu.ups.ppw63.facturacionTechShop.model;
 
 import java.util.List;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

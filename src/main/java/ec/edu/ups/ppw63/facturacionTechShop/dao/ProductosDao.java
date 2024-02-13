@@ -39,4 +39,14 @@ public class ProductosDao {
 		Query q = em.createQuery(jpql, Productos.class);
 		return q.getResultList();
 	}
+	
+	public Productos getProductoPorId(int codigo) {
+		String jpql = "SELECT c FROM Productos c WHERE c.codigo = :codigo";
+		Query q = em.createQuery(jpql, Productos.class);
+		q.setParameter("codigo", codigo);
+		List<Productos> productos = q.getResultList();
+		if (productos.size() > 0)
+			return productos.get(0);
+		return null;
+		}
 }

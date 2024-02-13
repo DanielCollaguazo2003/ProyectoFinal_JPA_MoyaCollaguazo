@@ -26,6 +26,9 @@ public class Productos {
 	@Column(name = "pro_descripcion", length = 120, nullable = false)
 	private String descripcion;
 	
+	@Column(name = "pro_breve_descripcion", length = 60, nullable = false)
+	private String breveDescripcion;
+	
 	@Column(name = "pro_precio", nullable = false)
 	private float precio;
 	
@@ -101,6 +104,18 @@ public class Productos {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+	
+	
+
+	public String getBreveDescripcion() {
+		return breveDescripcion;
+	}
+
+
+	public void setBreveDescripcion(String breveDescripcion) {
+		this.breveDescripcion = breveDescripcion;
+	}
+
 
 	@Override
 	public String toString() {

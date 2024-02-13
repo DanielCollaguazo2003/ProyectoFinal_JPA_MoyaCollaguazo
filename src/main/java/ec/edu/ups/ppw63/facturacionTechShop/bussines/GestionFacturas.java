@@ -9,6 +9,7 @@ import ec.edu.ups.ppw63.facturacionTechShop.dao.ProductosDao;
 import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.DetalleFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -32,17 +33,22 @@ public class GestionFacturas {
 	
 	public void guardarFacturas(Carrito carrito) {
 		CabeceraFacturas fac = new CabeceraFacturas();
-//		fac.setCliente(carrito.getCliente());
-		//fac.setFechaEmision(new Date());
-		//fac.setNumero("010101010100101");
-		//fac.setTotal(1000);
-		for(int i = 0; i > carrito.getDetalles().size(); i++) {
+		fac.setCliente(carrito.getCliente());
+		fac.setFecha(new Date());
+		System.out.println("La fecha es: " + fac.getFecha() + " El string de la fecha es: " + fac.getFecha().toString() + "fsdf" + new Date());
+		for(int i = 0; i < carrito.getDetalles().size(); i++) {
+			System.out.println("Entro a meter detalles");
 			DetalleFacturas det  = new DetalleFacturas();
 			det.setCantidad(carrito.getDetalles().get(i).getCantidad());
-			//det.setNombre("dsasadas");
-			//det.setPrecio(1000);
-			//Producto pro = daoProducto.read(carrito.getDetalles().get(i).getCodigoProducto());
-			//det.setProducto(pro);
+			Productos pro = daoProducto.read(carrito.getDetalles().get(i).getCodigoProducto());
+			det.setProductos(pro);
+			det.setPrecioSubTotal(pro.getPrecio() * carrito.getDetalles().get(i).getCantidad());
+			det.setPrecioIva((det.getPrecioSubTotal() * (12)) / 100);		
+			det.setPrecioTotal(det.getPrecioIva() + det.getPrecioSubTotal());
+			
+			fac.setPrecioSubtotal(fac.getPrecioSubtotal()+det.getPrecioSubTotal());
+			fac.setPrecioIva(fac.getPrecioIva()+det.getPrecioIva());
+			fac.setPrecioTotal(fac.getPrecioTotal()+det.getPrecioTotal());
 			
 			fac.addDetalles(det);
 		}

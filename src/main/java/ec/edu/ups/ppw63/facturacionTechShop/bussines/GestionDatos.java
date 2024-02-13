@@ -5,13 +5,16 @@ import java.util.List;
 
 
 import ec.edu.ups.ppw63.facturacionTechShop.dao.CabecerasDao;
+import ec.edu.ups.ppw63.facturacionTechShop.dao.CarritoDAO;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.CategoriaDao;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.ClienteDao;
 import ec.edu.ups.ppw63.facturacionTechShop.dao.ProductosDao;
 import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Categorias;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Cliente;
 import ec.edu.ups.ppw63.facturacionTechShop.model.DetalleFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Detalles_Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Direcciones;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.annotation.PostConstruct;
@@ -34,6 +37,9 @@ public class GestionDatos {
 	
 	@Inject
 	private CabecerasDao daoFactura;
+	
+	@Inject
+	private CarritoDAO daoCarrito;
 	
 	@PostConstruct
 	public void init() {
@@ -61,9 +67,6 @@ System.out.println("iniciando");
 		direcciones.setCodigoPostal("010101");
 		direcciones.setDireccionPricipal("Racar");
 		direcciones.setDireccionSecundaria("Camino sin nombre");
-		
-		direcciones.addClienteDir(cliente);
-		direcciones.addClienteDir(cliente2);
 		
 
 		Productos producto = new Productos();
@@ -200,6 +203,43 @@ System.out.println("iniciando");
 		
 		
 		daoFactura.insert(factura);
+		
+		/*Carrrrito*/
+		Carrito car1 = new Carrito();
+		car1.setCliente(cliente);
+		
+		Detalles_Carrito dcar1 = new Detalles_Carrito();
+		dcar1.setCantidad(2);
+		dcar1.setCodigoProducto(1);
+		
+		Detalles_Carrito dcar2 = new Detalles_Carrito();
+		dcar2.setCantidad(2);
+		dcar2.setCodigoProducto(2);
+		
+		car1.addDetalles(dcar1);
+		car1.addDetalles(dcar2);
+		
+		daoCarrito.insert(car1);
+		
+		Carrito car2 = new Carrito();
+		car2.setCliente(cliente2);
+		
+		
+		Detalles_Carrito dcar3 = new Detalles_Carrito();
+		dcar3.setCantidad(2);
+		dcar3.setCodigoProducto(3);
+		
+		Detalles_Carrito dcar4 = new Detalles_Carrito();
+		dcar4.setCantidad(2);
+		dcar4.setCodigoProducto(4);
+		
+		car2.addDetalles(dcar3);
+		car2.addDetalles(dcar4);
+		
+		daoCarrito.insert(car2);
+		
+		
+		
 		
 		/*System.out.println("\n------------- Clientes");
 		List<Cliente> list = daoCliente.getAll();

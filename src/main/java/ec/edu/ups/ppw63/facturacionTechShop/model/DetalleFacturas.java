@@ -25,6 +25,9 @@ public class DetalleFacturas {
 	@Column(name = "det_precio_total", nullable = false)
 	private float precioTotal;
 	
+	@Column(name = "det_precio_subtotal", nullable = false)
+	private float precioSubTotal;
+	
 	@Column(name = "det_precio_iva", nullable = false)
 	private float precioIva;
 	
@@ -46,6 +49,14 @@ public class DetalleFacturas {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public float getPrecioSubTotal() {
+		return precioSubTotal;
+	}
+
+	public void setPrecioSubTotal(float precioSubTotal) {
+		this.precioSubTotal = precioSubTotal;
 	}
 
 	public float getPrecioTotal() {

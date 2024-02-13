@@ -2,9 +2,10 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 
 import java.util.List;
 
-import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCarrito;
-import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
-import ec.edu.ups.ppw63.facturacionTechShop.model.Detalles_Carrito;
+import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionDirecciones;
+import ec.edu.ups.ppw63.facturacionTechShop.dto.RespuestaIngreso;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Direcciones;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Direcciones;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -18,21 +19,21 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("carritos")
-public class CarritoServices {
+@Path("direcciones")
+public class DireccionesServices {
 	
 	@Inject
-	private GestionCarrito gCarrito;
+	private GestionDirecciones gDirecciones;
+
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response agregarDetalle(Detalles_Carrito detalleCarrito) {
+	public Response crear(Direcciones direcciones) {
 		try{
-			System.out.println("INGRESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-			gCarrito.agregarDetalle(detalleCarrito);
+			gDirecciones.guardarDireccioness(direcciones);
 			ErrorMessage error = new ErrorMessage(1, "OK");
-			//return Response.ok(Carrito).build();
+			//return Response.ok(Direcciones).build();
 			return Response.status(Response.Status.CREATED).entity(error).build();
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -43,32 +44,15 @@ public class CarritoServices {
 		}
 	}
 	
-	/*
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response crear(Carrito carrito) {
-		try{
-			gCarrito.guardarCarritos(carrito);
-			ErrorMessage error = new ErrorMessage(1, "OK");
-			//return Response.ok(Carrito).build();
-			return Response.status(Response.Status.CREATED).entity(error).build();
-		}catch (Exception e) {
-			// TODO: handle exception
-			ErrorMessage error = new ErrorMessage(99, e.getMessage());
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(error)
-					.build();
-		}
-	}*/
+
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response actualizar(Carrito carrito) {
+	public Response actualizar(Direcciones direcciones) {
 		try{
-			gCarrito.actualizarCarrito(carrito);
-			return Response.ok(carrito).build();
+			gDirecciones.actualizarDirecciones(direcciones);
+			return Response.ok(direcciones).build();
 		}catch (Exception e) {
 			// TODO: handle exception
 			ErrorMessage error = new ErrorMessage(99, e.getMessage());
@@ -78,16 +62,32 @@ public class CarritoServices {
 		}
 	}
 	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response borrar(@QueryParam("id") int codigo) {
+		try{
+			gDirecciones.borrarDirecciones(codigo);
+			ErrorMessage error = new ErrorMessage(1, "OK");
+			//return Response.ok(Direcciones).build();
+			return Response.status(Response.Status.CREATED).entity(error).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(99, e.getMessage());
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("list")
-	public Response getCarritos(){
-		List<Carrito> carritos = gCarrito.getCarritos();
-		if(carritos.size()>0)
-			return Response.ok(carritos).build();
+	public Response getDireccioness(){
+		List<Direcciones> DireccionesList = gDirecciones.getDireccioness();
+		if(DireccionesList.size()>0)
+			return Response.ok(DireccionesList).build();
 		
-		ErrorMessage error = new ErrorMessage(6, "No se registran Carritos");
+		ErrorMessage error = new ErrorMessage(6, "No se registran Direccioness");
 		return Response.status(Response.Status.NOT_FOUND)
 				.entity(error)
 				.build();
@@ -97,17 +97,16 @@ public class CarritoServices {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response leerPorCliente(@QueryParam("codigo") int codigo) {
-		try{
 			System.out.println("id " +  codigo );
-			Carrito car = gCarrito.getClientePorCliente(codigo);
-			return Response.ok(car).build();
-		}catch (Exception e) {
-			// TODO: handle exception
-			ErrorMessage error = new ErrorMessage(4, "Carro no existe");
+			Direcciones dir = gDirecciones.getDireccionPorCliente(codigo);
+			if(dir != null) 
+				return Response.ok(dir).build();
+			
+			ErrorMessage error = new ErrorMessage(4, "direccion no existe");
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity(error)
 					.build();
-		}
+			
 	}
 
 }

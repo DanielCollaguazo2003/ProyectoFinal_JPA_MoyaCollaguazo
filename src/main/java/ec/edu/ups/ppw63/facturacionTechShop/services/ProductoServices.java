@@ -91,5 +91,20 @@ public class ProductoServices {
 					.build();
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("ofertas")
+	public Response getOfertas(){
+		List<Productos> productos = gProducto.getOfertas();
+		if(productos.size()>0)
+			return Response.ok(productos).build();
+
+		ErrorMessage error = new ErrorMessage(6, "No se registran Productos");
+		return Response.status(Response.Status.NOT_FOUND)
+				.entity(error)
+				.build();
+		
+	}
 
 }

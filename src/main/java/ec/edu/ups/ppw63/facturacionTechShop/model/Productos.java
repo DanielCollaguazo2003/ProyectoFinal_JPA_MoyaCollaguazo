@@ -16,40 +16,63 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Productos {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "pro_codigo")
 	private int codigo;
-	
+
 	@Column(name = "pro_nombre", length = 60, nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "pro_descripcion", length = 120, nullable = false)
 	private String descripcion;
-	
+
 	@Column(name = "pro_breve_descripcion", length = 60, nullable = false)
 	private String breveDescripcion;
-	
+
 	@Column(name = "pro_precio", nullable = false)
-	private float precio;
-	
+	private double precio;
+
 	@Column(name = "pro_cantidad", nullable = false)
 	private int cantidad;
-	
+
 	@Column(name = "pro_img", length = 500, nullable = true)
 	private String imagen;
+
+	@Column(name = "pro_oferta", nullable = true)
+	private int oferta;
+
+	public Productos(int codigo, String nombre, String descripcion, String breveDescripcion, double precio, int cantidad,
+			String imagen, int oferta) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.breveDescripcion = breveDescripcion;
+		this.precio = precio;
+		this.cantidad = cantidad;
+		this.imagen = imagen;
+		this.oferta = oferta;
+	}
 	
-	
+	public Productos() {}
+
 //	@ManyToOne
 //	@JoinColumn(name = "cat_codigo")
 //	Categorias categorias;
-	
-	//@OneToMany(mappedBy = "productos", cascade = CascadeType.ALL)
-	//List<DetalleFacturas> detallesList;
-	
+
+	// @OneToMany(mappedBy = "productos", cascade = CascadeType.ALL)
+	// List<DetalleFacturas> detallesList;
+
+	public int getOferta() {
+		return oferta;
+	}
+
+	public void setOferta(int oferta) {
+		this.oferta = oferta;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
-	
 
 //	public Categorias getCategorias() {
 //		return categorias;
@@ -59,7 +82,6 @@ public class Productos {
 //	public void setCategorias(Categorias categorias) {
 //		this.categorias = categorias;
 //	}
-
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -81,8 +103,14 @@ public class Productos {
 		this.descripcion = descripcion;
 	}
 
-	public float getPrecio() {
+
+
+	public double getPrecio() {
 		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	public void setPrecio(float precio) {
@@ -104,19 +132,14 @@ public class Productos {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	
-	
 
 	public String getBreveDescripcion() {
 		return breveDescripcion;
 	}
 
-
 	public void setBreveDescripcion(String breveDescripcion) {
 		this.breveDescripcion = breveDescripcion;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -124,8 +147,6 @@ public class Productos {
 				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + "]";
 	}
 
-	
-	
 //	@Override
 //	public String toString() {
 //		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
@@ -133,7 +154,4 @@ public class Productos {
 //				+ "]";
 //	}
 
-
-	
-	
 }

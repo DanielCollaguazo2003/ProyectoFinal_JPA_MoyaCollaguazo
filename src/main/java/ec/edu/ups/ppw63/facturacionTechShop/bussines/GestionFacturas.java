@@ -42,7 +42,7 @@ public class GestionFacturas {
 			det.setCantidad(carrito.getDetalles().get(i).getCantidad());
 			Productos pro = daoProducto.read(carrito.getDetalles().get(i).getCodigoProducto());
 			det.setProductos(pro);
-			det.setPrecioSubTotal(pro.getPrecio() * carrito.getDetalles().get(i).getCantidad());
+			det.setPrecioSubTotal((float) (pro.getPrecio() * carrito.getDetalles().get(i).getCantidad()));
 			det.setPrecioIva((det.getPrecioSubTotal() * (12)) / 100);		
 			det.setPrecioTotal(det.getPrecioIva() + det.getPrecioSubTotal());
 			
@@ -67,5 +67,6 @@ public class GestionFacturas {
 	public CabeceraFacturas getFacturaPorCliente(int codigo){
 		return daoFactura.getFacturaPorCliente(codigo);
 	}
+
 	
 }

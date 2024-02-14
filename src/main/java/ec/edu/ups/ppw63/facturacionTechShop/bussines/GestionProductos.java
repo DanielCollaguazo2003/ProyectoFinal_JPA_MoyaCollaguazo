@@ -44,6 +44,10 @@ public class GestionProductos {
 	
 	public Productos getProductoPorId(int codigo){
 		return daoProducto.getProductoPorId(codigo);
-}
+	}
 	
+	public List<Productos> getOfertas(){
+		return daoProducto.getOfertas();
+	}
+
 }

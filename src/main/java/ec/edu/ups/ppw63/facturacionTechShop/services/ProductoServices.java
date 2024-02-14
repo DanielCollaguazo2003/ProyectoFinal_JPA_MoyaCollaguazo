@@ -74,5 +74,37 @@ public class ProductoServices {
 				.build();
 		
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces("application/json")
+	public Response leer3(@QueryParam("codigo") int codigo) {
+		try{
+			System.out.println("codigo " +  codigo );
+			Productos pro = gProducto.getProductoPorId(codigo);
+			return Response.ok(pro).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(4, "el producto no existe");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("ofertas")
+	public Response getOfertas(){
+		List<Productos> productos = gProducto.getOfertas();
+		if(productos.size()>0)
+			return Response.ok(productos).build();
+
+		ErrorMessage error = new ErrorMessage(6, "No se registran Productos");
+		return Response.status(Response.Status.NOT_FOUND)
+				.entity(error)
+				.build();
+		
+	}
 
 }

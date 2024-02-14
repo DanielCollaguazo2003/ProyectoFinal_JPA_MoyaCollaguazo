@@ -6,10 +6,13 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Direcciones {
@@ -20,6 +23,9 @@ public class Direcciones {
 	
 	@Column(name = "dir_pais", length = 60, nullable = false)
 	private String nombrePais;
+	
+	@Column(name = "dir_provincia", length = 60, nullable = false)
+	private String nombreProvincia;
 	
 	@Column(name = "dir_ciudad", length = 60, nullable = false)
 	private String nombreCiudad;
@@ -33,8 +39,9 @@ public class Direcciones {
 	@Column(name = "dir_direccion_secundaria", length = 120, nullable = false)
 	private String direccionSecundaria;
 
-	@OneToMany(mappedBy = "direcciones", cascade = CascadeType.ALL)
-	List<Cliente> clienteList;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "codigo_cliente")
+	private Cliente cliente;
 
 	public int getCodigo() {
 		return codigo;
@@ -83,20 +90,32 @@ public class Direcciones {
 	public void setDireccionSecundaria(String direccionSecundaria) {
 		this.direccionSecundaria = direccionSecundaria;
 	}
-
-	public List<Cliente> getClienteList() {
-		return clienteList;
-	}
-
-	public void setClienteList(List<Cliente> clienteList) {
-		this.clienteList = clienteList;
-	}
 	
-	public void addClienteDir (Cliente cliente) {
-		if (clienteList == null)
-			clienteList = new ArrayList<Cliente>();
-			
-		clienteList.add(cliente);
+	
+
+	//public List<Cliente> getClienteList() {
+	//	return clienteList;
+	//}
+
+	//public void setClienteList(List<Cliente> clienteList) {
+	//	this.clienteList = clienteList;
+	//}
+	
+	//public void addClienteDir (Cliente cliente) {
+	//	if (clienteList == null)
+		//	clienteList = new ArrayList<Cliente>();
+	//		
+	//	clienteList.add(cliente);
+	//}
+	
+	
+
+	public String getNombreProvincia() {
+		return nombreProvincia;
+	}
+
+	public void setNombreProvincia(String nombreProvincia) {
+		this.nombreProvincia = nombreProvincia;
 	}
 
 	@Override
@@ -104,6 +123,14 @@ public class Direcciones {
 		return "Direcciones [codigo=" + codigo + ", nombrePais=" + nombrePais + ", nombreCiudad=" + nombreCiudad
 				+ ", codigoPostal=" + codigoPostal + ", direccionPricipal=" + direccionPricipal
 				+ ", direccionSecundaria=" + direccionSecundaria + "]";
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

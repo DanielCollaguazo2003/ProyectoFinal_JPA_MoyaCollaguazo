@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +33,6 @@ public class CabeceraFacturas {
 	
 	@Column(name = "cab_precio_subtotal", nullable = false)
 	private float precioSubtotal;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente")

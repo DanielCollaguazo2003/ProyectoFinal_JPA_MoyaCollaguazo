@@ -10,6 +10,7 @@ import ec.edu.ups.ppw63.facturacionTechShop.model.Cliente;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
+
 @Stateless
 public class GestionClientes {
 

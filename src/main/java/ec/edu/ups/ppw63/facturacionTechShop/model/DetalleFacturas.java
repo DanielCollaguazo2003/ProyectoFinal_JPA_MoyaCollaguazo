@@ -2,7 +2,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.model;
 
 
 
-import jakarta.json.bind.annotation.JsonbTransient;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +25,14 @@ public class DetalleFacturas {
 	@Column(name = "det_precio_total", nullable = false)
 	private float precioTotal;
 	
+	@Column(name = "det_precio_subtotal", nullable = false)
+	private float precioSubTotal;
+	
 	@Column(name = "det_precio_iva", nullable = false)
 	private float precioIva;
 	
 	@ManyToOne
 	@JoinColumn(name = "pro_codigo")
-	@JsonbTransient
 	Productos productos;
 	
 	public int getCodigo() {
@@ -47,6 +49,14 @@ public class DetalleFacturas {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public float getPrecioSubTotal() {
+		return precioSubTotal;
+	}
+
+	public void setPrecioSubTotal(float precioSubTotal) {
+		this.precioSubTotal = precioSubTotal;
 	}
 
 	public float getPrecioTotal() {

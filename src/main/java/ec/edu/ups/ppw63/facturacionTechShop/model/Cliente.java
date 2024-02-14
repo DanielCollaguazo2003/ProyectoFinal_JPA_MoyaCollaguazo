@@ -2,7 +2,6 @@ package ec.edu.ups.ppw63.facturacionTechShop.model;
 
 import java.util.List;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,9 +54,9 @@ public class Cliente {
 	
 	public Cliente() {}
 
-	@ManyToOne
-	@JoinColumn(name = "dir_codigo")
-	Direcciones direcciones;
+	//@ManyToOne
+	//@JoinColumn(name = "dir_codigo")
+	//Direcciones direcciones;
 	
 //	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //	List<CabeceraFacturas> caberasList;
@@ -110,19 +109,10 @@ public class Cliente {
 		this.celular = celular;
 	}
 
-	public Direcciones getDirecciones() {
-		return direcciones;
-	}
-
-	public void setDirecciones(Direcciones direcciones) {
-		this.direcciones = direcciones;
-	}
-
 	@Override
 	public String toString() {
 		return "Cliente [codigo=" + codigo + ", primerNombre=" + primerNombre + ", primerApellido=" + primerApellido
-				+ ", correo=" + correo + ", contrasenia=" + contrasenia + ", celular=" + celular + ", direcciones="
-				+ direcciones + "]";
+				+ ", correo=" + correo + ", contrasenia=" + contrasenia + ", celular=" + celular + "]";
 	}
 
 //	public List<CabeceraFacturas> getCaberasList() {

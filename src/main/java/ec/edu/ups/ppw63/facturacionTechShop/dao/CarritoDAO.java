@@ -51,13 +51,15 @@ public class CarritoDAO {
 		return null;
 		}
 	
-	public Carrito getCarritoPorCliente(int codigo) {
-		String jpql = "SELECT c FROM Carrito c WHERE c.codigo_cliente = :codigo";
-		Query q = em.createQuery(jpql, Carrito.class);
-		q.setParameter("codigo", codigo);
-		List<Carrito> carritos = q.getResultList();
-		if (carritos.size() > 0)
-			return carritos.get(0);
-		return null;
+	public Carrito getCarritoPorCliente(int codigoCliente) {
+	    String jpql = "SELECT c FROM Carrito c WHERE c.cliente.codigo = :codigo";
+	    Query q = em.createQuery(jpql, Carrito.class);
+	    q.setParameter("codigo", codigoCliente);
+	    List<Carrito> carritos = q.getResultList();
+	    if (!carritos.isEmpty()) {
+	        return carritos.get(0);
+	    }
+	    return null;
 	}
+
 }

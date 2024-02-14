@@ -65,13 +65,16 @@ public class CarritoServices {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response actualizar(Carrito carrito) {
+	public Response limpiarCarrito(@QueryParam("codigo") int codigo) {
 		try{
-			gCarrito.actualizarCarrito(carrito);
-			return Response.ok(carrito).build();
+			gCarrito.limpiarDetalles(codigo);
+			ErrorMessage error = new ErrorMessage(15, "Limpiado");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
 		}catch (Exception e) {
 			// TODO: handle exception
-			ErrorMessage error = new ErrorMessage(99, e.getMessage());
+			ErrorMessage error = new ErrorMessage(16, "no se pudo realizar la limpieaza" + e.getMessage());
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity(error)
 					.build();

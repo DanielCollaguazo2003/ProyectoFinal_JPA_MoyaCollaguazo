@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.ups.ppw63.facturacionTechShop.model.CabeceraFacturas;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -31,6 +32,17 @@ public class FacturaDAO {
 	public CabeceraFacturas read(int codigo) {
 		CabeceraFacturas factura = em.find(CabeceraFacturas.class, codigo);
 		return factura;
+	}
+	
+	public CabeceraFacturas getFacturaPorCliente(int codigoCliente) {
+	    String jpql = "SELECT c FROM CabeceraFacturas c WHERE c.cliente.codigo = :codigo";
+	    Query q = em.createQuery(jpql, CabeceraFacturas.class);
+	    q.setParameter("codigo", codigoCliente);
+	    List<CabeceraFacturas> facturas = q.getResultList();
+	    if (!facturas.isEmpty()) {
+	        return facturas.get(facturas.size()-1);
+	    }
+	    return null;
 	}
 	
 	public List<CabeceraFacturas> getAll(){

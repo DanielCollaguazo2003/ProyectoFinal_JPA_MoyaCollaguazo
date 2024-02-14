@@ -95,5 +95,21 @@ public class FacturarServices {
 				.build();
 		
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response leerPorCliente(@QueryParam("codigo") int codigo) {
+		try{
+			System.out.println("id " +  codigo );
+			CabeceraFacturas fac = gFacturas.getFacturaPorCliente(codigo);
+			return Response.ok(fac).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(4, "Carro no existe");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
+	}
 
 }

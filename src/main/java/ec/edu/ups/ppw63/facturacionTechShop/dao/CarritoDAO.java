@@ -49,7 +49,7 @@ public class CarritoDAO {
 		if (carritos.size() > 0)
 			return carritos.get(0);
 		return null;
-		}
+	}
 	
 	public Carrito getCarritoPorCliente(int codigoCliente) {
 	    String jpql = "SELECT c FROM Carrito c WHERE c.cliente.codigo = :codigo";

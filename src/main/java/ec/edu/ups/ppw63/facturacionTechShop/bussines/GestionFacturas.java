@@ -64,8 +64,8 @@ public class GestionFacturas {
 		return daoFactura.getAll();
 	}
 	
-	private void generarFactura() {
-		
+	public CabeceraFacturas getFacturaPorCliente(int codigo){
+		return daoFactura.getFacturaPorCliente(codigo);
 	}
 	
 }

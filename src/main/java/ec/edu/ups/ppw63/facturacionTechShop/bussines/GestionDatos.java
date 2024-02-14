@@ -109,15 +109,15 @@ System.out.println("iniciando");
 		daoProducto.insert(producto4);
 		
 		Productos producto5 = new Productos();
-		producto5.setNombre("Cortina");
+		producto5.setNombre("Samsung Galaxy");
 		producto5.setDescripcion("Cortina de Cuarto de 2m");
-		producto5.setPrecio(15);
+		producto5.setPrecio(2000);
 		producto5.setCantidad(45);
 		producto5.setImagen("/asstest/img/cortina.png");
 		daoProducto.insert(producto2);
 		
 		Productos producto6 = new Productos();
-		producto6.setNombre("Mesa Familiar");
+		producto6.setNombre("Xiaomi Ultra");
 		producto6.setDescripcion("Mesa de comedor fammiliar para 6 personas");
 		producto6.setPrecio(150);
 		producto6.setCantidad(30);

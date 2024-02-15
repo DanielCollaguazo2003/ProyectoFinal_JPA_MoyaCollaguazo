@@ -49,5 +49,9 @@ public class GestionProductos {
 	public List<Productos> getOfertas(){
 		return daoProducto.getOfertas();
 	}
+	
+	public List<Productos> buscarPorNombre(String nombre){
+		return daoProducto.buscarPorNombre(nombre);
+	}
 
 }

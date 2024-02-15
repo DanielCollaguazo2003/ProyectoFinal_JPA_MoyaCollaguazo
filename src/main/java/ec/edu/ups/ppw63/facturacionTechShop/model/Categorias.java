@@ -29,10 +29,7 @@ public class Categorias {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	List<Productos> productosList = new ArrayList<Productos>();
-	
-	
-	
-	
+
 	public List<Productos> getProductosList() {
 		return productosList;
 	}

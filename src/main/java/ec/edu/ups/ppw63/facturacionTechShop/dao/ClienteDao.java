@@ -47,4 +47,14 @@ public class ClienteDao {
 			return clientes.get(0);
 		return null;
 		}
+	
+	public Cliente getClientePorId(int codigo) {
+		String jpql = "SELECT c FROM Cliente c WHERE c.codigo = :codigo";
+		Query q = em.createQuery(jpql, Cliente.class);
+		q.setParameter("codigo", codigo);
+		List<Cliente> clientes = q.getResultList();
+		if (clientes.size() > 0)
+			return clientes.get(0);
+		return null;
+		}
 }

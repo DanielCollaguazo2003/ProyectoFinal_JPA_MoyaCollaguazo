@@ -16,11 +16,6 @@ public class Detalles_Carrito {
 	private int codigoProducto;
 	private int codigoCarrito;
 	
-	/**@ManyToOne
-    @JoinColumn(name = "codigo_producto")
-    private Producto producto;
-	 **/
-	
 	public int getCodigo() {
 		return codigo;
 	}

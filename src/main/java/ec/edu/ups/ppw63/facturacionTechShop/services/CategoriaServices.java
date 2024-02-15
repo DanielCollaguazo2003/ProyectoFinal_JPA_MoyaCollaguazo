@@ -4,6 +4,7 @@ import java.util.List;
 
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCategorias;
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionProductos;
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Categorias;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.inject.Inject;
@@ -39,6 +40,22 @@ public class CategoriaServices {
 				.entity(error)
 				.build();
 		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response leerCategoriaPorId(@QueryParam("codigo") int codigo) {
+		try{
+			System.out.println("id " +  codigo );
+			Categorias cat = gCategorias.getCategoriaPorId(codigo);
+			return Response.ok(cat).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(4, "Carro no existe");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
 	}
 
 }

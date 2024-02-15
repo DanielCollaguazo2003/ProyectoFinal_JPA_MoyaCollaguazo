@@ -72,18 +72,11 @@ public class ProductosDao {
 
 
 
-//	public List<CantidadFacturasCliente> getTotalFacturas() {
-//		String sql = "SELECT codigo_cliente, nombre, count(f.codigo) " + "FROM factura f , cliente c "
-//				+ "WHERE f.codigo_cliente = c.codigo GROUP BY codigo_cliente, nombre ";
-//
-//		Query q = em.createNativeQuery(sql);
-//
-//		List<Object[]> list = q.getResultList();
-//		List<CantidadFacturasCliente> datos = new ArrayList<CantidadFacturasCliente>();
-//		for (Object[] result : list) {
-//			datos.add(new CantidadFacturasCliente(((Number) result[0]).intValue(), result[1].toString(),
-//					((Number) result[2]).intValue()));
-//		}
-//		return datos;
-//	}
+	public List<Productos> buscarPorNombre(String nombre) {
+	    String jpql = "SELECT c FROM Productos c WHERE LOWER(c.nombre) LIKE LOWER(:nombre)";
+	    Query q = em.createQuery(jpql, Productos.class);
+	    q.setParameter("nombre", "%" + nombre + "%");
+	    return q.getResultList();
+	}
+
 }

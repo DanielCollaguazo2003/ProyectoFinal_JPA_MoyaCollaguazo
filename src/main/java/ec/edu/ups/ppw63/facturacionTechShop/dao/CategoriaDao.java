@@ -2,6 +2,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.dao;
 
 import java.util.List;
 
+import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Categorias;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -38,6 +39,16 @@ public class CategoriaDao {
 												 // En lugar del * se coloca una variable, esa variable hace referencia al alias de la entidad
 		Query q = em.createQuery(jpql, Categorias.class);
 		return q.getResultList();
+	}
+	
+	public Categorias getCategoriaPorId(int codigo) {
+		String jpql = "SELECT c FROM Categorias c WHERE c.codigo = :codigo";
+		Query q = em.createQuery(jpql, Categorias.class);
+		q.setParameter("codigo", codigo);
+		List<Categorias> cats= q.getResultList();
+		if (cats.size() > 0)
+			return cats.get(0);
+		return null;
 	}
 	
 }

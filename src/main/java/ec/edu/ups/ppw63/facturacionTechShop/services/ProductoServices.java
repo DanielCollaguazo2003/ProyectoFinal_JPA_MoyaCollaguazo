@@ -106,5 +106,17 @@ public class ProductoServices {
 				.build();
 		
 	}
+	
+	@GET
+    @Path("/buscar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarProductos(@QueryParam("nombre") String nombre) {
+        List<Productos> productos = gProducto.buscarPorNombre(nombre);
+        if (productos.isEmpty()) {
+        	ErrorMessage error = new ErrorMessage(404, "No se encontraron productos");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+        return Response.ok(productos).build();
+    }
 
 }

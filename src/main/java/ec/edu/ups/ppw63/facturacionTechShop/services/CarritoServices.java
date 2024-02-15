@@ -3,6 +3,7 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 import java.util.List;
 
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionCarrito;
+import ec.edu.ups.ppw63.facturacionTechShop.dto.prueba;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Carrito;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Detalles_Carrito;
 import jakarta.inject.Inject;
@@ -62,12 +63,13 @@ public class CarritoServices {
 		}
 	}*/
 	
-	@PUT
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response limpiarCarrito(@QueryParam("codigo") int codigo) {
+	@Path("clear")
+	public Response limpiarCarrito(prueba prueba ) {
 		try{
-			gCarrito.limpiarDetalles(codigo);
+			gCarrito.limpiarDetalles(prueba.getCodigo_cliente());
 			ErrorMessage error = new ErrorMessage(15, "Limpiado");
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity(error)

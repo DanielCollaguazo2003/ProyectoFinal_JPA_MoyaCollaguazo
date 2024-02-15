@@ -118,4 +118,20 @@ public class ClienteServices {
 				.build();
 		
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response leerPorCodigo(@QueryParam("codigo") int codigo) {
+		try{
+			System.out.println("id " +  codigo );
+			Cliente cli = gClientes.getClientePorId(codigo);
+			return Response.ok(cli).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+			ErrorMessage error = new ErrorMessage(4, "cliente no existe");
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity(error)
+					.build();
+		}
+	}
 }

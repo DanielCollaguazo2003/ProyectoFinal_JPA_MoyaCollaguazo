@@ -42,7 +42,9 @@ public class GestionClientes {
 			daoCliente.insert(cliente);
 		}
 	}
-	
+	public Cliente getClientePorId(int codigo){
+		return daoCliente.getClientePorId(codigo);
+}
 	public void borrarCliente(int codigo) {
 		daoCliente.remove(codigo);
 	}

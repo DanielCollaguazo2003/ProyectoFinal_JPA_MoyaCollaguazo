@@ -55,13 +55,6 @@ public class Productos {
 	
 	public Productos() {}
 
-//	@ManyToOne
-//	@JoinColumn(name = "cat_codigo")
-//	Categorias categorias;
-
-	// @OneToMany(mappedBy = "productos", cascade = CascadeType.ALL)
-	// List<DetalleFacturas> detallesList;
-
 	public int getOferta() {
 		return oferta;
 	}
@@ -73,15 +66,6 @@ public class Productos {
 	public int getCodigo() {
 		return codigo;
 	}
-
-//	public Categorias getCategorias() {
-//		return categorias;
-//	}
-//
-//
-//	public void setCategorias(Categorias categorias) {
-//		this.categorias = categorias;
-//	}
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -146,12 +130,5 @@ public class Productos {
 		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
 				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + "]";
 	}
-
-//	@Override
-//	public String toString() {
-//		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
-//				+ precio + ", cantidad=" + cantidad + ", imagen=" + imagen + ", categorias=" + categorias
-//				+ "]";
-//	}
 
 }

@@ -2,7 +2,12 @@ package ec.edu.ups.ppw63.facturacionTechShop.services;
 
 import java.util.List;
 
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+import io.opentracing.contrib.cdi.Traced;
+import io.opentracing.util.GlobalTracer;
 import ec.edu.ups.ppw63.facturacionTechShop.bussines.GestionProductos;
+import ec.edu.ups.ppw63.facturacionTechShop.conf.TracingConfig;
 import ec.edu.ups.ppw63.facturacionTechShop.model.Productos;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -20,9 +25,14 @@ import jakarta.ws.rs.core.Response;
 @Path("productos")
 public class ProductoServices {
 	
+	private final Tracer tracer = GlobalTracer.get();
+	
 	@Inject
 	private GestionProductos gProducto;
-
+	
+	@Inject
+    private TracingConfig tracingConfig;
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,22 +89,31 @@ public class ProductoServices {
 	@Produces(MediaType.APPLICATION_JSON)
 	//@Produces("application/json")
 	public Response leer3(@QueryParam("codigo") int codigo) {
+		Span s = tracer.buildSpan("listar productos").start();
 		try{
 			System.out.println("codigo " +  codigo );
 			Productos pro = gProducto.getProductoPorId(codigo);
 			return Response.ok(pro).build();
+			
 		}catch (Exception e) {
+			
 			// TODO: handle exception
 			ErrorMessage error = new ErrorMessage(4, "el producto no existe");
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity(error)
 					.build();
+			
+			
+		} finally {
+			s.finish();
 		}
+		
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("ofertas")
+	@Traced
 	public Response getOfertas(){
 		List<Productos> productos = gProducto.getOfertas();
 		if(productos.size()>0)
@@ -110,6 +129,7 @@ public class ProductoServices {
 	@GET
     @Path("/buscar")
     @Produces(MediaType.APPLICATION_JSON)
+	@Traced
     public Response buscarProductos(@QueryParam("nombre") String nombre) {
         List<Productos> productos = gProducto.buscarPorNombre(nombre);
         if (productos.isEmpty()) {

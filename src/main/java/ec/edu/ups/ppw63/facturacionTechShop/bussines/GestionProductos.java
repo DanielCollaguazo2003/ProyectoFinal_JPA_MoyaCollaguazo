@@ -14,6 +14,8 @@ public class GestionProductos {
 	@Inject
 	private ProductosDao daoProducto;
 	
+	
+	
 	public void actualizarProducto(Productos producto) throws Exception {
 		Productos pro = daoProducto.read(producto.getCodigo());
 		if (pro != null){

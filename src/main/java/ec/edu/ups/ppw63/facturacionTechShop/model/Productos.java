@@ -30,7 +30,7 @@ public class Productos {
 	private String breveDescripcion;
 
 	@Column(name = "pro_precio", nullable = false)
-	private double precio;
+	private float precio;
 
 	@Column(name = "pro_cantidad", nullable = false)
 	private int cantidad;
@@ -41,7 +41,7 @@ public class Productos {
 	@Column(name = "pro_oferta", nullable = true)
 	private int oferta;
 
-	public Productos(int codigo, String nombre, String descripcion, String breveDescripcion, double precio, int cantidad,
+	public Productos(int codigo, String nombre, String descripcion, String breveDescripcion, float precio, int cantidad,
 			String imagen, int oferta) {
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -93,9 +93,6 @@ public class Productos {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
